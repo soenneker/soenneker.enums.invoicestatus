@@ -1,4 +1,4 @@
-﻿using Intellenum;
+using Soenneker.Gen.EnumValues;
 using Soenneker.Attributes.PublicOpenApiObject;
 
 namespace Soenneker.Enums.InvoiceStatus;
@@ -7,7 +7,7 @@ namespace Soenneker.Enums.InvoiceStatus;
 /// Common invoice statuses
 /// </summary>
 [PublicOpenApiObject]
-[Intellenum<string>]
+[EnumValue<string>]
 public sealed partial class InvoiceStatus
 {
     /// <summary>
