@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Enums.InvoiceStatus.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Enums.InvoiceStatus\Soenneker.Enums.InvoiceStatus.csproj" />
     </ItemGroup>
 
     <ItemGroup>
