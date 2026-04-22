@@ -1,10 +1,9 @@
-﻿using Xunit;
 
 namespace Soenneker.Enums.InvoiceStatus.Tests;
 
 public sealed class InvoiceStatusTests
 {
-    [Fact]
+    [Test]
     public void Default()
     {
 
