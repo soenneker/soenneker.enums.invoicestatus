@@ -4,7 +4,7 @@ using Soenneker.Attributes.PublicOpenApiObject;
 namespace Soenneker.Enums.InvoiceStatus;
 
 /// <summary>
-/// Common invoice statuses
+/// Identifies the current lifecycle and payment state of an invoice.
 /// </summary>
 [PublicOpenApiObject]
 [EnumValue<string>]
