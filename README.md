@@ -5,7 +5,7 @@
 
 # Soenneker.Enums.InvoiceStatus
 
-Identifies the current lifecycle and payment state of an invoice.
+A string-backed enum-value type for carrying an invoice lifecycle or payment-status label through application and API contracts.
 
 ## Install
 
@@ -13,18 +13,30 @@ Identifies the current lifecycle and payment state of an invoice.
 dotnet add package Soenneker.Enums.InvoiceStatus
 ```
 
-## What you get
+## Usage
 
-- `InvoiceStatus` — Identifies the current lifecycle and payment state of an invoice.
+```csharp
+using Soenneker.Enums.InvoiceStatus;
 
-## API at a glance
+InvoiceStatus status = InvoiceStatus.Sent;
+string wireValue = status.Value; // "Sent"
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `InvoiceStatus.Draft` | Invoice is in draft state and is being prepared or edited. | Invoice is in draft state and is being prepared or edited. |
-| `InvoiceStatus.Pending` | Invoice is finalized and ready to be sent to the customer. | Invoice is finalized and ready to be sent to the customer. |
-| `InvoiceStatus.Sent` | Invoice has been sent to the customer and is awaiting payment. | Invoice has been sent to the customer and is awaiting payment. |
-| `InvoiceStatus.Paid` | Invoice has been fully paid by the customer. | Invoice has been fully paid by the customer. |
-| `InvoiceStatus.Overdue` | Invoice is past its due date and payment is overdue. | Invoice is past its due date and payment is overdue. |
-| `InvoiceStatus.Cancelled` | Invoice has been cancelled and is no longer valid. | Invoice has been cancelled and is no longer valid. |
-| `InvoiceStatus.Void` | Invoice has been voided and is no longer valid for payment. | Invoice has been voided and is no longer valid for payment. |
+if (InvoiceStatus.TryFromValue(input, out InvoiceStatus? parsed))
+{
+    // Validate the requested transition in your domain layer
+}
+```
+
+Available values:
+
+- `Draft` — being prepared or edited
+- `Pending` — finalized and ready to send
+- `Sent` — delivered to the customer and awaiting payment
+- `Paid` — fully paid
+- `Overdue` — past its due date
+- `Cancelled` — cancelled and no longer valid
+- `Void` — voided and no longer payable
+
+`System.Text.Json` serializes the type as the shown string value. `FromValue` throws for unknown input; use `TryFromValue` when parsing requests or provider data. `FromName` and `TryFromName` are also generated.
+
+This package supplies status labels only. It does not enforce allowed transitions, calculate whether an invoice is overdue, record payments, or distinguish the accounting and audit treatment of `Cancelled` versus `Void`. A `Paid` value is not proof of settlement; derive and persist status changes from trusted payment and invoice records in the domain layer.
